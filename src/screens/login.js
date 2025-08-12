@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import api from '../services/api/api.js';
 
 export default function LoginScreen({ navigation }) {
   const [cpf, setCpf] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   const formatCpf = (value) => {
     let inputCpf = value.replace(/\D/g, '');
@@ -33,7 +35,7 @@ export default function LoginScreen({ navigation }) {
       const cpfOnlyNumbers = cpf.replace(/\D/g, '');
       console.log(cpfOnlyNumbers);
       console.log(password);
-      const response = await api.post('/auth/login', { cpfOnlyNumbers, password });
+      const response = await api.post('/auth/login', { cpf: cpfOnlyNumbers, password });
       console.log('Login successful:', response.data);
       navigation.navigate('Home');
     } catch (error) {
@@ -55,13 +57,24 @@ export default function LoginScreen({ navigation }) {
         onChangeText={handleCpfChange}
         keyboardType="numeric"
       />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        secureTextEntry
-        value={password}
-        onChangeText={setPassword}
-      />
+      <View style={styles.passwordContainer}>
+        <TextInput
+          style={styles.input}
+          placeholder="Password"
+          secureTextEntry={!showPassword}
+          value={password}
+          onChangeText={setPassword}
+        />
+        <TouchableOpacity
+          style={styles.iconContaineter} 
+          onPress={() => setShowPassword(!showPassword)}>
+          <Icon
+            name={showPassword ? 'visibility' : 'visibility-off'}
+            size={24}
+            color="#888"
+          />
+      </TouchableOpacity>
+      </View>
       <TouchableOpacity style={styles.button} onPress={handleLogin}>
         <Text style={styles.buttonText}>Entrar</Text>
       </TouchableOpacity>
@@ -80,6 +93,8 @@ const styles = StyleSheet.create({
   button: { backgroundColor: '#133776', padding: 16, borderRadius: 8, width: '100%' },
   buttonText: { color: 'white', textAlign: 'center', fontWeight: 'bold' },
   link: { marginTop: 16, color: '#133776', textAlign: 'center' },
+  passwordContainer: { width: '100%', position: 'relative', marginBottom: 12, justifyContent: 'center' },
+  iconContaineter: { position: 'absolute', right: 10, top: '50%', transform: [{translateY: -18}] }
 });
 
 //LogoColors: '#131965' '#0bb9d9', '#133776', '#0986b0', '#0f5d8e'
