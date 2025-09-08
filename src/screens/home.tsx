@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
-import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 
 export default function HomeScreen() {
   return (
@@ -28,22 +28,22 @@ export default function HomeScreen() {
         style={styles.optionsScroll}
       >
         <TouchableOpacity style={styles.optionButton}>
-          <MaterialCommunityIcons name="cash-plus" size={26} color="#fff" />
+          {/* <MaterialIcons name="" size={26} color="#fff" /> */}
           <Text style={styles.optionText}>Depositar</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.optionButton}>
-          <MaterialCommunityIcons name="arrow-up-bold" size={26} color="#fff" />
+          <MaterialIcons name="chevron-right" size={30} style={{transform:[{rotate: "90deg"}] }} color="#ff0000" />
           <Text style={styles.optionText}>Transferir</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.optionButton}>
-          <MaterialCommunityIcons name="arrow-down-bold" size={26} color="#fff" />
+            <MaterialIcons name="chevron-right" size={30} style={{transform:[{rotate: "-90deg"}] }} color="#00FF00" />
           <Text style={styles.optionText}>Receber</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.optionButton}>
-          <MaterialCommunityIcons name="barcode" size={26} color="#fff" />
+          <MaterialIcons name="payments" size={26} color="#fff" />
           <Text style={styles.optionText}>Pagar</Text>
         </TouchableOpacity>
       </ScrollView>

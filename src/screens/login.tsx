@@ -1,46 +1,33 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-import api from '../services/api/api.js';
+import api from '../services/api/api';
 
-export default function LoginScreen({ navigation }) {
+import { formatCpf } from '../utils/formatters';
+import { useNavigation } from '@react-navigation/native';
+
+
+
+export default function LoginScreen() {
   const [cpf, setCpf] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-
-  const formatCpf = (value) => {
-    let inputCpf = value.replace(/\D/g, '');
-    inputCpf = inputCpf.slice(0, 11);
-
-  if (inputCpf.length > 9) {
-    inputCpf = inputCpf.replace(/(\d{3})(\d{3})(\d{3})(\d{1,2})/, '$1.$2.$3-$4');
-  } 
-  else if (inputCpf.length > 6) {
-    inputCpf = inputCpf.replace(/(\d{3})(\d{3})(\d{1,3})/, '$1.$2.$3');
-  } 
-  else if (inputCpf.length > 3) {
-    inputCpf = inputCpf.replace(/(\d{3})(\d{1,3})/, '$1.$2');
-  }
-
-    return inputCpf;
-  };
-
-  const handleCpfChange = (inputCpf) => {
+  const navigation = useNavigation();
+  const handleCpfChange = (inputCpf: string) => {
     const formattedCpf = formatCpf(inputCpf);
     setCpf(formattedCpf);
   };
 
   const handleLogin = async () => {
-    try {
-      const cpfOnlyNumbers = cpf.replace(/\D/g, '');
-      console.log(cpfOnlyNumbers);
-      console.log(password);
-      const response = await api.post('/auth/login', { cpf: cpfOnlyNumbers, password });
-      console.log('Login successful:', response.data);
+    // try {
+      // const cpfOnlyNumbers = cpf.replace(/\D/g, '');
+      // console.log(cpfOnlyNumbers);
+      // console.log(password);
+      // const response = await api.post('/auth/login', { cpf: cpfOnlyNumbers, password });
+      // console.log('Login successful:', response.data);
       navigation.navigate('Home');
-    } catch (error) {
-      console.log('Login failed:', error.response?.data || error.message);
-    }
+    // } catch (error) {
+      // console.log('Login failed:', error.response?.data || error.message);
+    // }
   };
 
   return (
@@ -68,11 +55,11 @@ export default function LoginScreen({ navigation }) {
         <TouchableOpacity
           style={styles.iconContaineter} 
           onPress={() => setShowPassword(!showPassword)}>
-          <Icon
+          {/* <Icon
             name={showPassword ? 'visibility' : 'visibility-off'}
             size={24}
             color="#888"
-          />
+          /> */}
       </TouchableOpacity>
       </View>
       <TouchableOpacity style={styles.button} onPress={handleLogin}>
