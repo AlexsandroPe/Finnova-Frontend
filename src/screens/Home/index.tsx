@@ -1,10 +1,10 @@
+
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
-
-export default function HomeScreen() {
-  return (
-    <View style={styles.container}>
+const Home = () => {
+    return (
+         <View style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity>
@@ -21,14 +21,14 @@ export default function HomeScreen() {
         <Text style={styles.balanceValue}>R$ 1.250,89</Text>
       </View>
 
-      {/* Opções */}
+
       <ScrollView 
         horizontal 
         showsHorizontalScrollIndicator={false} 
         style={styles.optionsScroll}
       >
         <TouchableOpacity style={styles.optionButton}>
-          {/* <MaterialIcons name="" size={26} color="#fff" /> */}
+         
           <Text style={styles.optionText}>Depositar</Text>
         </TouchableOpacity>
 
@@ -48,7 +48,7 @@ export default function HomeScreen() {
         </TouchableOpacity>
       </ScrollView>
 
-      {/* Atividade */}
+   
       <View style={styles.activityContainer}>
         <Text style={styles.activityTitle}>Últimas atividades</Text>
         <View style={styles.activityItem}>
@@ -61,8 +61,9 @@ export default function HomeScreen() {
         </View>
       </View>
     </View>
-  );
+    )
 }
+
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#8A05BE', paddingTop: 50 },
@@ -80,3 +81,7 @@ const styles = StyleSheet.create({
   activityValue: { fontSize: 16, color: 'red' },
   activityValuePositive: { fontSize: 16, color: 'green' },
 });
+
+
+export default Home;
+

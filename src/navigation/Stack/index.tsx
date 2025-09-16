@@ -1,16 +1,16 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import LoginScreen from '../../screens/login';
+import LoginScreen from '../../screens/Login';
 import RegisterUser from '../../screens/RegisterUser';
-import HomeScreen from '../../screens/home';
+import { propsStackRoutes } from '../interfaces';
 
-const {Navigator, Screen} = createNativeStackNavigator();
+const {Navigator, Screen} = createNativeStackNavigator<propsStackRoutes>();
 
 const StackRoutes = () => {
     return (
             <Navigator initialRouteName='Login'>
                 <Screen name='Login' component={LoginScreen} options={{headerShown: false}}/>
                 <Screen name='Register' component={RegisterUser} options={{headerShown: false}}/>
-                <Screen name='Home' component={HomeScreen} options={{headerShown: false}}/>
+                <Screen name='BottomTabs' component={RegisterUser} options={{headerShown: false}}/>
             </Navigator>
     )
 }
