@@ -1,14 +1,16 @@
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import {BottomTabScreenProps} from '@react-navigation/bottom-tabs'
-export type propsStackRoutes = {
-    Login: undefined;
-    Register: undefined;
-    BottomTabs: undefined;
-}
-export type propsBottomTabsRoutes = {
+
+import { NavigatorScreenParams } from "@react-navigation/native";
+
+export type BottomTabsParamList = {
     Home: undefined;
     Account: undefined;
 }
 
-export type PropsStackSCreenApp = NativeStackScreenProps<propsStackRoutes>
-export type PropsBottomSCreenApp = BottomTabScreenProps<propsBottomTabsRoutes>
+export type StackParamList = {
+    Login: undefined; 
+    Register: undefined;
+    BottomTabs: NavigatorScreenParams<BottomTabsParamList>;
+}
+
+
+

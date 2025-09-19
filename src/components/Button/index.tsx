@@ -7,7 +7,7 @@ type ButtonProps = PressableProps & {
 }     
 const Button = ({title, onPress, variant}:ButtonProps) => {
     return (
-        <Pressable>
+        <Pressable style={{borderWidth: 1}}>
             <Text>{title}</Text>
         </Pressable>
     )

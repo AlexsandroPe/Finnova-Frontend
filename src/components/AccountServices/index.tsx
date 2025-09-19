@@ -1,10 +1,9 @@
 import { useNavigation } from "@react-navigation/native";
 import { Pressable, Text } from "react-native";
-import { PropsBottomSCreenApp} from "../../navigation/interfaces";
 
 
 
-type servicesProps = PropsBottomSCreenApp & {
+type servicesProps = {
     name: string; 
     icon: string; 
     route: string; 
@@ -12,10 +11,11 @@ type servicesProps = PropsBottomSCreenApp & {
 
 export default function AccountService({name, icon, route}: servicesProps) {
 
-    const {navigation} = useNavigation<servicesProps>();
+    // const {navigation} = useNavigation();
     return (
-        <Pressable onPress={() => navigation.navigate('Account')}>
+        <Pressable>
+            
             <Text>{name}</Text>
-        </Pressable> 
+        </Pressable>
     )
 }

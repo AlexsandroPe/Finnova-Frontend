@@ -2,30 +2,31 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import api from '../../services/api/api';
-
+import {NativeStackNavigationProp, NativeStackScreenProps} from "@react-navigation/native-stack";
 import { formatCpf } from '../../utils/formatters';
 import { useNavigation } from '@react-navigation/native';
-import { PropsStackSCreenApp } from '../../navigation/interfaces';
+import { StackParamList } from '../../navigation/interfaces';
 
+type LoginProps = NativeStackNavigationProp<StackParamList, "Login">
 
 const Login = () =>{
            const [cpf, setCpf] = useState('');
            const [password, setPassword] = useState('');
            const [showPassword, setShowPassword] = useState(false);
-           const {navigation} = useNavigation<PropsStackSCreenApp>();
+           const navigation = useNavigation<LoginProps>();
            const handleCpfChange = (inputCpf: string) => {
              const formattedCpf = formatCpf(inputCpf);
              setCpf(formattedCpf);
            };
          
            const handleLogin = async () => {
+             navigation.navigate('BottomTabs', {screen: 'Home'});
              // try {
                // const cpfOnlyNumbers = cpf.replace(/\D/g, '');
                // console.log(cpfOnlyNumbers);
                // console.log(password);
                // const response = await api.post('/auth/login', { cpf: cpfOnlyNumbers, password });
                // console.log('Login successful:', response.data);
-               navigation.navigate('BottomTabs');
              // } catch (error) {
                // console.log('Login failed:', error.response?.data || error.message);
              // }
@@ -63,10 +64,12 @@ const Login = () =>{
                    /> */}
                </TouchableOpacity>
                </View>
+
                <TouchableOpacity style={styles.button} onPress={handleLogin}>
                  <Text style={styles.buttonText}>Entrar</Text>
                </TouchableOpacity>
-               <TouchableOpacity onPress={() => navigation.navigate('Register')}>
+
+               <TouchableOpacity>
                  <Text style={styles.link}>Não tem conta? Cadastre-se</Text>
                </TouchableOpacity>
              </View>
